@@ -1,0 +1,42 @@
+name: Code Quality
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    code-checks:
+        name: Code Checks
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Enable Corepack and prepare Yarn 4
+              run: |
+                  corepack enable
+                  corepack prepare yarn@4.9.1 --activate
+
+            - name: Setup Node.js and Yarn cache
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'yarn'
+
+            - name: Install dependencies with Yarn
+              run: yarn install --immutable
+
+            - name: Build Panda CSS
+              run: yarn prepare
+
+            - name: Check code formatting (Prettier)
+              run: yarn format:check
+
+            - name: Lint code (ESLint)
+              run: yarn lint
+
+            - name: Type check (TypeScript)
+              run: yarn typecheck

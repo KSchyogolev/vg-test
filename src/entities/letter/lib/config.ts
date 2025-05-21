@@ -1,0 +1,1 @@
+export const LETTER_MARKETING_COUNT = 5
