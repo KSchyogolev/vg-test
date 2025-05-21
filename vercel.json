@@ -10,20 +10,8 @@
             "runtime": "@vercel/node@5.1.16"
         }
     },
-    "routes": [
-        {
-            "src": "/api/openai(.*)",
-            "dest": "/api/openai"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/$1"
-        }
-    ],
     "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/"
-        }
+        { "source": "/api/(.*)", "destination": "/api" },
+        { "source": "/(.*)", "destination": "/" }
     ]
 }
