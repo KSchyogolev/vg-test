@@ -1,7 +1,5 @@
 # Variant Group Test Assignment
 
-## Task
-
 This project implementation of the [Variant Group React Developer Test Assignment](https://variantnet.notion.site/React-Developer-Test-Assignment-Variant-Group-d7a1e3460dc643958eb57a0518ce84b2).
 
 ## Technology Stack
