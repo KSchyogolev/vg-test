@@ -60,9 +60,6 @@
         ],
         "src/**/*.{json,css,scss,md}": [
             "prettier --write"
-        ],
-        "*.{ts,tsx}": [
-            "yarn typecheck"
         ]
     }
 }

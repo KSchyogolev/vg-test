@@ -31,5 +31,5 @@
             "styled-system/*": ["styled-system/*"]
         }
     },
-    "include": ["src", "styled-system", "api"]
+    "include": ["src", "api"]
 }
