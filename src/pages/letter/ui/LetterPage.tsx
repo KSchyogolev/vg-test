@@ -3,8 +3,8 @@ import { useLettersStore } from '@/entities/letter'
 import { EditLetterForm } from '@/features/edit-letter'
 import { LetterCard } from '@/widgets/letter-card'
 import { Loader } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Heading } from 'ui-kit/components'
 import {
     contentStyles,
@@ -15,21 +15,13 @@ import {
 
 const LetterEditor: React.FC = () => {
     const { letterId } = useParams<{ letterId: string }>()
-    const { letters } = useLettersStore()
+    const { letters, isLoading } = useLettersStore()
     const navigate = useNavigate()
-    const [isLoading, setIsLoading] = useState(true)
+    const location = useLocation()
 
     const letter = letterId
         ? letters.find((letter) => letter.id === letterId)
         : undefined
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false)
-        }, 500)
-
-        return () => clearTimeout(timer)
-    }, [])
 
     useEffect(() => {
         if (!isLoading && letterId && !letter) {
@@ -38,12 +30,11 @@ const LetterEditor: React.FC = () => {
     }, [letterId, letter, navigate, isLoading])
 
     const handleLetterSuccess = (newLetterId?: string) => {
-        if (newLetterId) {
+        if (newLetterId && location.pathname === ROUTES.newLetter) {
             navigate(ROUTES.editLetter(newLetterId), { replace: true })
         }
     }
 
-    // TODO: make a skeleton loader in ui-kit
     if (isLoading && letterId) {
         return (
             <div className={pageStyles}>
