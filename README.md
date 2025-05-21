@@ -2,11 +2,7 @@
 
 ## Task
 
-This project is my implementation of the [Variant Group React Developer Test Assignment](https://variantnet.notion.site/React-Developer-Test-Assignment-Variant-Group-d7a1e3460dc643958eb57a0518ce84b2).
-
-## Project Overview
-
-This repository contains a React application built according to specifications from Variant Group's test assignment.
+This project implementation of the [Variant Group React Developer Test Assignment](https://variantnet.notion.site/React-Developer-Test-Assignment-Variant-Group-d7a1e3460dc643958eb57a0518ce84b2).
 
 ## Technology Stack
 
