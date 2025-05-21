@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "buildCommand": "yarn build",
+    "outputDirectory": "dist",
+    "installCommand": "yarn install",
+    "functions": {
+        "api/openai.ts": {
+            "memory": 1024,
+            "maxDuration": 10,
+            "runtime": "@vercel/node@5.1.16"
+        }
+    },
+    "routes": [
+        {
+            "src": "/api/openai(.*)",
+            "dest": "/api/openai"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/$1"
+        }
+    ]
+}

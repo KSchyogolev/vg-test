@@ -1,0 +1,68 @@
+{
+    "name": "vg-test",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "prepare": "panda codegen && husky",
+        "dev": "vite",
+        "build": "vite build",
+        "lint": "eslint .",
+        "preview": "vite preview",
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+        "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+        "lint-staged": "lint-staged",
+        "typecheck": "tsc --noEmit",
+        "vercel:dev": "vercel dev",
+        "vercel:deploy": "vercel"
+    },
+    "dependencies": {
+        "@hookform/resolvers": "5.0.1",
+        "axios": "1.9.0",
+        "clsx": "2.1.1",
+        "lucide-react": "0.511.0",
+        "react": "19.1.0",
+        "react-dom": "19.1.0",
+        "react-hook-form": "7.56.4",
+        "react-router-dom": "7.6.0",
+        "uuid": "11.1.0",
+        "zod": "3.25.7",
+        "zustand": "5.0.4"
+    },
+    "devDependencies": {
+        "@eslint/js": "9.25.0",
+        "@pandacss/dev": "0.53.6",
+        "@types/node": "22.15.18",
+        "@types/react": "19.1.4",
+        "@types/react-dom": "19.1.5",
+        "@types/uuid": "10.0.0",
+        "@vercel/node": "5.1.16",
+        "@vitejs/plugin-react": "4.4.1",
+        "autoprefixer": "10.4.21",
+        "eslint": "9.25.0",
+        "eslint-config-prettier": "10.1.5",
+        "eslint-plugin-react": "7.37.5",
+        "eslint-plugin-react-hooks": "5.2.0",
+        "eslint-plugin-react-refresh": "0.4.19",
+        "globals": "16.0.0",
+        "husky": "9.1.7",
+        "lint-staged": "16.0.0",
+        "prettier": "3.5.3",
+        "typescript": "5.8.3",
+        "typescript-eslint": "8.30.1",
+        "vite": "6.3.5"
+    },
+    "packageManager": "yarn@4.9.1+sha512.f95ce356460e05be48d66401c1ae64ef84d163dd689964962c6888a9810865e39097a5e9de748876c2e0bf89b232d583c33982773e9903ae7a76257270986538",
+    "lint-staged": {
+        "src/**/*.{js,jsx,ts,tsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "src/**/*.{json,css,scss,md}": [
+            "prettier --write"
+        ],
+        "*.{ts,tsx}": [
+            "yarn typecheck"
+        ]
+    }
+}
