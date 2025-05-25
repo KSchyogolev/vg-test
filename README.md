@@ -39,7 +39,7 @@ src/
 The following enhancements are planned for future iterations:
 
 - Replace Vercel Serverless Functions with a full-featured Node.js server
-- Replace IndexedDB with a full-fledged database with a backend server.
+- Replace IndexedDB with a full-fledged database with a backend server
 - Extract UI components into a separate UI kit with storybook
 - Improve the design system:
     - Reduce color variations
