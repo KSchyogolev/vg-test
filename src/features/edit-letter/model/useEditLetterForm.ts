@@ -52,32 +52,31 @@ export const useEditLetterForm = ({
 
     const onSubmit = async (data: FormData) => {
         setProcessingLetterId(letterId)
-        let letterIdToUpdate = letterId
-
         try {
             // TODO: move prompt to backend to avoid sharing additional value of product
             const prompt = createLetterPrompt(data)
-
             const generatedText = await generateText(prompt)
 
+            // TODO: discuss with product team and add optimistic saving letter before text generation to display loader on main page
             if (letterId) {
                 await updateLetter(letterId, {
                     config: data,
                     text: generatedText,
                 })
+                onSuccess?.()
             } else {
-                letterIdToUpdate = uuidv4()
+                const newLetterId = uuidv4()
                 await addLetter({
-                    id: letterIdToUpdate,
+                    id: newLetterId,
                     config: data,
                     text: generatedText,
                 })
+                // Adding a flag to tell if we're creating or updating might better for clarity and future features, but here it's overkill.
+                onSuccess?.(newLetterId)
             }
-
-            onSuccess?.(letterIdToUpdate)
         } catch (error) {
             console.error('Error generating letter:', error)
-            // TODO: make a toast in ui-kit with design
+            // TODO: make a toast in ui-kit with design team
             alert('Error generating letter: ' + error)
         } finally {
             setProcessingLetterId(null)

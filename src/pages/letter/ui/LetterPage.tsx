@@ -3,8 +3,8 @@ import { useLettersStore } from '@/entities/letter'
 import { EditLetterForm } from '@/features/edit-letter'
 import { LetterCard } from '@/widgets/letter-card'
 import { Loader } from 'lucide-react'
-import React, { useEffect } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect, useRef } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Heading } from 'ui-kit/components'
 import {
     contentStyles,
@@ -17,7 +17,15 @@ const LetterEditor: React.FC = () => {
     const { letterId } = useParams<{ letterId: string }>()
     const { letters, isLoading } = useLettersStore()
     const navigate = useNavigate()
-    const location = useLocation()
+
+    // Abort control to avoid side effects (TODO: move to shared folder)
+    const isMountedRef = useRef(true)
+    useEffect(() => {
+        isMountedRef.current = true
+        return () => {
+            isMountedRef.current = false
+        }
+    }, [])
 
     const letter = letterId
         ? letters.find((letter) => letter.id === letterId)
@@ -30,7 +38,7 @@ const LetterEditor: React.FC = () => {
     }, [letterId, letter, navigate, isLoading])
 
     const handleLetterSuccess = (newLetterId?: string) => {
-        if (newLetterId && location.pathname === ROUTES.newLetter) {
+        if (newLetterId && isMountedRef.current) {
             navigate(ROUTES.editLetter(newLetterId), { replace: true })
         }
     }
